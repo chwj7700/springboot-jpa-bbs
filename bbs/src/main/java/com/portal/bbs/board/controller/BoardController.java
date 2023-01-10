@@ -15,14 +15,12 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping(value="board/getAllBoards")
-    @ResponseBody
     public List<BoardResultDTO> getAllBoards(){
 
         return boardService.findAll();
     }
 
     @GetMapping(value="board/getBoardById")
-    @ResponseBody
     public BoardResultDTO getBoardById(@RequestBody BoardSearchDTO boardSearchDTO) {
 
         Long id = boardSearchDTO.getBoardId();
