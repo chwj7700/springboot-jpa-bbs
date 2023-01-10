@@ -23,7 +23,7 @@ public class BoardController {
     @GetMapping(value="board/getBoardById")
     public BoardResultDTO getBoardById(@RequestBody BoardSearchDTO boardSearchDTO) {
 
-        Long id = boardSearchDTO.getBoardId();
+        Long id = boardSearchDTO.getId();
 
         return boardService.findByBoardId(id);
     }
