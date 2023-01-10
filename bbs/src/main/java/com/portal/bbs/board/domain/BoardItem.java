@@ -16,7 +16,7 @@ public class BoardItem extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="BOARD_ITEM_ID")
-    private Long boardItemId;
+    private Long id;
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "BOARD_ID")

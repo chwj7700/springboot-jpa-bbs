@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Data
 public class BoardSearchDTO extends BaseEntity {
 
-    private Long boardId;
+    private Long id;
 
     private String boardName;
 }

@@ -39,7 +39,7 @@ public class BoardService {
         Sort sort = Sort.by(Sort.Direction.DESC, "boardId");
         PageRequest pageRequest = PageRequest.of(page, size, sort);
 
-        Page<BoardResultDTO> boards = boardRepository.findPagebyId(boardId, pageRequest)
+        Page<BoardResultDTO> boards = boardRepository.findPageById(boardId, pageRequest)
                 .map((board -> new BoardResultDTO(board)));
         return boards;
     }

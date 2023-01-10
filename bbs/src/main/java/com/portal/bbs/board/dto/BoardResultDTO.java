@@ -12,7 +12,7 @@ import javax.persistence.Id;
 @Data
 public class BoardResultDTO {
 
-    private Long boardId;
+    private Long id;
 
     private String boardName;
 
@@ -21,7 +21,7 @@ public class BoardResultDTO {
     private String useReplyYn;
 
     public BoardResultDTO(Board board){
-        this.boardId = board.getBoardId();
+        this.id = board.getId();
         this.boardName = board.getBoardName();
         this.lineReplyYn = board.getLineReplyYn();
         this.useReplyYn = board.getUseReplyYn();
