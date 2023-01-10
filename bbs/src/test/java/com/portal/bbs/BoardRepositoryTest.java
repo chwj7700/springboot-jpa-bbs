@@ -24,8 +24,9 @@ public class BoardRepositoryTest {
         Board board = new Board("공지사항", "Y", "Y");
 
         //when
-        Long savedId = boardRepository.save(board);
-        Board findBoard = boardRepository.findByBoardId(savedId);
+        boardRepository.save(board);
+        Board findBoard = boardRepository.findById(board.getBoardId())
+                .orElseThrow();
 
         //then
         Assertions.assertThat(findBoard.getBoardId()).isEqualTo(board.getBoardId());

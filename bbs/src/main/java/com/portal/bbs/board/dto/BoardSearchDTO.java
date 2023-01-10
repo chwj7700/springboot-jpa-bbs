@@ -5,9 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
-@ToString
+@Data
 public class BoardSearchDTO extends BaseEntity {
 
     private Long boardId;

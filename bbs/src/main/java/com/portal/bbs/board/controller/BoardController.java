@@ -1,6 +1,6 @@
 package com.portal.bbs.board.controller;
 
-import com.portal.bbs.board.domain.Board;
+import com.portal.bbs.board.dto.BoardResultDTO;
 import com.portal.bbs.board.dto.BoardSearchDTO;
 import com.portal.bbs.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
@@ -16,14 +16,14 @@ public class BoardController {
 
     @GetMapping(value="board/getAllBoards")
     @ResponseBody
-    public List<Board> getAllBoards(){
+    public List<BoardResultDTO> getAllBoards(){
 
-        return boardService.findAllBoards();
+        return boardService.findAll();
     }
 
     @GetMapping(value="board/getBoardById")
     @ResponseBody
-    public Board getBoardById(@RequestBody BoardSearchDTO boardSearchDTO) {
+    public BoardResultDTO getBoardById(@RequestBody BoardSearchDTO boardSearchDTO) {
 
         Long id = boardSearchDTO.getBoardId();
 

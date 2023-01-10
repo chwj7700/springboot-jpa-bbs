@@ -1,30 +1,11 @@
 package com.portal.bbs.board.repository;
 
 import com.portal.bbs.board.domain.Board;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.util.ArrayList;
-import java.util.List;
+public interface BoardRepository extends JpaRepository<Board, Long> {
 
-@Repository
-public class BoardRepository {
-
-    @PersistenceContext
-    private EntityManager em;
-
-    public Long save(Board board){
-        em.persist(board);
-        return board.getBoardId();
-    }
-
-    public Board findByBoardId(Long id){
-        return em.find(Board.class, id);
-    }
-
-    public List<Board> findAllBoards() {
-        List<Board> boards = em.createQuery("select Board from Board", Board.class).getResultList();
-        return boards;
-    }
+    Page<Board> findPagebyId (long id, Pageable pageable);
 }

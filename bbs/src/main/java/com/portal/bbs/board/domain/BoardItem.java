@@ -5,6 +5,8 @@ import lombok.*;
 
 import javax.persistence.*;
 
+import static javax.persistence.FetchType.*;
+
 @Entity
 @Getter
 @NoArgsConstructor
@@ -16,7 +18,7 @@ public class BoardItem extends BaseEntity {
     @Column(name ="BOARD_ITEM_ID")
     private Long boardItemId;
 
-    @ManyToOne
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "BOARD_ID")
     private Board board;
 
