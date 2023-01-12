@@ -8,39 +8,56 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class BoardService {
 
     private final BoardRepository boardRepository;
 
-    public void save(Board board) {
-        boardRepository.save(board);
-    }
-
     public BoardResultDTO findByBoardId(Long boardId) {
         return boardRepository.findById(boardId)
-                .map(board -> new BoardResultDTO(board))
+                .map(BoardResultDTO::new)
                 .orElseThrow();
     }
 
     public List<BoardResultDTO> findAll() {
         return boardRepository.findAll()
                 .stream()
-                .map(board -> new BoardResultDTO(board))
+                .map(BoardResultDTO::new)
                 .toList();
     }
 
-    public Page<BoardResultDTO> findPagebyId(Long boardId, int page, int size) {
+    public Page<BoardResultDTO> findBoardsByIdWithPage(Long boardId, int page, int size) {
 
         Sort sort = Sort.by(Sort.Direction.DESC, "boardId");
         PageRequest pageRequest = PageRequest.of(page, size, sort);
 
-        Page<BoardResultDTO> boards = boardRepository.findPageById(boardId, pageRequest)
-                .map((board -> new BoardResultDTO(board)));
-        return boards;
+        return boardRepository.findPageById(boardId, pageRequest)
+                .map((BoardResultDTO::new));
+    }
+
+    @Transactional
+    public void save(Board board) {
+
+        Optional<Board> boardOptional = boardRepository.findById(board.getId());
+
+        if(boardOptional.isEmpty()) {
+            boardRepository.save(board);
+        }else{
+            Board boardOrigin = boardOptional.get();
+            boardOrigin.changeBoard(board);
+            boardRepository.save(boardOrigin);
+        }
+    }
+
+    @Transactional
+    public void delete(Board board){
+        boardRepository.delete(board);
     }
 }

@@ -1,16 +1,13 @@
 package com.portal.bbs.board.dto;
 
+import com.portal.bbs.base.domain.BaseEntity;
 import com.portal.bbs.board.domain.Board;
-import lombok.Builder;
 import lombok.Data;
-
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.EqualsAndHashCode;
 
 @Data
-public class BoardResultDTO {
+@EqualsAndHashCode(callSuper = true)
+public class BoardResultDTO extends BaseEntity {
 
     private Long id;
 
@@ -21,9 +18,13 @@ public class BoardResultDTO {
     private String useReplyYn;
 
     public BoardResultDTO(Board board){
-        this.id = board.getId();
-        this.boardName = board.getBoardName();
-        this.lineReplyYn = board.getLineReplyYn();
-        this.useReplyYn = board.getUseReplyYn();
+        this.setId(board.getId());
+        this.setBoardName(board.getBoardName());
+        this.setLineReplyYn(board.getLineReplyYn());
+        this.setUseReplyYn(board.getUseReplyYn());
+        this.setCreatedBy(board.getCreatedBy());
+        this.setCreatedDate(board.getCreatedDate());
+        this.setUpdatedBy(board.getUpdatedBy());
+        this.setUpdatedDate(board.getUpdatedDate());
     }
 }
