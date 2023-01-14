@@ -5,7 +5,6 @@ import com.portal.bbs.board.domain.Board;
 import com.portal.bbs.boardItem.domain.BoardItem;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.jetbrains.annotations.NotNull;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -23,7 +22,7 @@ public class BoardItemResultDTO extends BaseEntity {
 
     private Integer replyStep;
 
-    public BoardItemResultDTO(@NotNull BoardItem boardItem){
+    public BoardItemResultDTO( BoardItem boardItem){
         this.setId(boardItem.getId());
         this.setTitle(boardItem.getTitle());
         this.setContents(boardItem.getContents());

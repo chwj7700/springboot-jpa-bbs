@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -33,27 +32,26 @@ public class BoardService {
                 .toList();
     }
 
-    public Page<BoardResultDTO> findBoardsByIdWithPage(Long boardId, int page, int size) {
+    public Page<BoardResultDTO> findAllWithPage(int page, int size) {
 
-        Sort sort = Sort.by(Sort.Direction.DESC, "boardId");
+        Sort sort = Sort.by(Sort.Direction.DESC, "id");
         PageRequest pageRequest = PageRequest.of(page, size, sort);
 
-        return boardRepository.findPageById(boardId, pageRequest)
-                .map((BoardResultDTO::new));
+        return boardRepository.findAll(pageRequest).map((BoardResultDTO::new));
     }
 
     @Transactional
     public void save(Board board) {
 
-        Optional<Board> boardOptional = boardRepository.findById(board.getId());
+        /*Optional<Board> boardOptional = boardRepository.findById(board.getId());
 
-        if(boardOptional.isEmpty()) {
+        if(boardOptional.isEmpty()) {*/
             boardRepository.save(board);
-        }else{
+        /*}else{
             Board boardOrigin = boardOptional.get();
             boardOrigin.changeBoard(board);
             boardRepository.save(boardOrigin);
-        }
+        }*/
     }
 
     @Transactional

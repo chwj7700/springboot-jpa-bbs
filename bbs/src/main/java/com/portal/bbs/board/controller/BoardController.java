@@ -35,9 +35,8 @@ public class BoardController {
 
         int page = boardSearchDTO.getPage();
         int pageSize = boardSearchDTO.getPageSize();
-        Long id = boardSearchDTO.getId();
 
-        return boardService.findBoardsByIdWithPage(id, page, pageSize);
+        return boardService.findAllWithPage(page, pageSize);
     }
 
     @PostMapping(value="board/save")
