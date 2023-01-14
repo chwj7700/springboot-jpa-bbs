@@ -25,11 +25,11 @@ public class BoardRepositoryTest {
 
         //when
         boardRepository.save(board);
-        Board findBoard = boardRepository.findById(board.getBoardId())
+        Board findBoard = boardRepository.findById(board.getId())
                 .orElseThrow();
 
         //then
-        Assertions.assertThat(findBoard.getBoardId()).isEqualTo(board.getBoardId());
+        Assertions.assertThat(findBoard.getId()).isEqualTo(board.getId());
         Assertions.assertThat(findBoard.getBoardName()).isEqualTo(board.getBoardName());
         Assertions.assertThat(findBoard).isEqualTo(board);
         System.out.println("findMember == board: " + (findBoard == board));
